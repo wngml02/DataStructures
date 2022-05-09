@@ -103,35 +103,41 @@ class Tree:
 
 		def deleteByCopying(self, x):
 			a, b, pt = x.left, x.right, x.parent
-			if a == None: # x.left가 없는 경우
-				c = b # x자리에 x.right 오기
-			else:
-				c = y = a 
-				while y.right != None:
-					y = y.right
-				y.right = b # x의 왼쪽 서브트리에서 가장 큰 값 y 찾기
-				x.key = y.key
-				c.parent = pt # y의 값을 x에 놓는다
-				if b != None:
-					b.parent = x  # y의 왼쪽 서브 트리 있으면 y의 위치로 + 부모 노드 설정
-				if y.left != None:
-					y = y.left
-					y.left.parent = a
-					
-			if self.root == x: # 루트가 x면
-				if c == x: # c가 x이면
-					c.parent = None # c의 부모가 None
-				self.root = c # 다시 루트는 c가 됨
-			else: # 루트가 아니면
-				if pt.left == x: # x의 위치가 왼쪽이면
-					pt.left = c # 왼쪽에 c가 들어가고
+			if a: # x.left가 있으면
+				y = x.left
+				while y.right:
+					y = y.right # y.right의 제일 끝 찾기
+				x.key = y.key # y의 값을 x 자리에 copy
+				if y.left: # y.left가 있으면
+					y.left.parent = y.parent # y자리에 옮기기
+				if y.parent.left == y:
+					y.parent.left = y.left
 				else:
-					pt.right = c # 아니면 오른쪽에 들어가고 
-				if c != None:
-					c.parent = pt # c를 x로 완전히 만들기 위해 부모연결
-			self.size = self.size - 1
-	
+					y.parent.right = y.left
+				del y
+			elif a == None and b: # a가 없고 b가 있다면
+				y = b # y는 x.right
+				while y.left:
+					y = y.left # y.left 제일 끝 찾기
+				x.key = y.key # copy
+				if y.right: # y.right에 값이 있으면
+					y.right.parent = y.parent # y자리에 옮기기
+				if y.parent.left == y:
+					y.parent.left = y.right
+				else:
+					y.parent.right = y.right
+				del y
 
+			else:
+				if pt == None: #부모가 없으면
+					self.root = None #root가 x
+				else:
+					if pt.left == x:
+						pt.left = None
+					else:
+						pt.right = None
+					del x
+			self.size = self.size - 1 #사이즈 조절
 
 T = Tree()
 
