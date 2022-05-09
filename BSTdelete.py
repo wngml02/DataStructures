@@ -120,15 +120,15 @@ class Tree:
 					
 			if self.root == x: # 루트가 x면
 				if c == x: # c가 x이면
-					c.parent = None #c의 부모가 None
-				self.root = c #다시 루트는 c가 됨
+					c.parent = None # c의 부모가 None
+				self.root = c # 다시 루트는 c가 됨
 			else: # 루트가 아니면
 				if pt.left == x: # x의 위치가 왼쪽이면
-					pt.left = c #왼쪽에 c가 들어가고
+					pt.left = c # 왼쪽에 c가 들어가고
 				else:
-					pt.right = c #아니면 오른쪽에 들어가고 
+					pt.right = c # 아니면 오른쪽에 들어가고 
 				if c != None:
-					c.parent = pt #c를 x로 완전히 만들기 위해 부모연결
+					c.parent = pt # c를 x로 완전히 만들기 위해 부모연결
 			self.size = self.size - 1
 	
 
