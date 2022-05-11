@@ -15,10 +15,10 @@ class BST:
 				return self.size
 
 		def preorder(self, v):
-				if v != None:
-						print(v.key, end=' ')
-						self.preorder(v.left)
-						self.preorder(v.right)
+			if v != None:
+				print(v.key, end=' ')
+				self.preorder(v.left)
+				self.preorder(v.right)
 
 		def inorder(self, v):
 			if v != None:
@@ -32,7 +32,6 @@ class BST:
 				self.postorder(v.left)
 				self.postorder(v.right)
 				print(v,'',end='')
-				
 				
 		def find_loc(self, key):
 			if self.size == None:
@@ -58,24 +57,24 @@ class BST:
 				return None
 
 		def insert(self, key):
-			p = self.find_loc(key)
-			if p == None or p.key != key:
+			p = self.find_loc(key) # key값인 노드 찾기
+			if p == None or p.key != key: # 없으면, findloc이 부모노드를 return 했을 때 하나 만들어 주기
 				v = Node(key)
-				if p == None:
-					self.root = v
-				else:
-					v.parent = p
+				if p == None: #None이면
+					self.root = v # 루트에 추가
+				else: # 아니면
+					v.parent = p 
 					if p.key >= key:
 						p.left = v
 					else:
-						p.right = v
+						p.right = v # 오른쪽이면 추가해야함
 				self.size = self.size + 1
 				return v
 			else:
 				print("key is already in the tree!")
 				return p
-			# key가 이미 트리에 있다면 에러 출력없이 None만 리턴!
-					# 노드들의 height 정보 update 필요
+			x.height = 1 + max(self.height(x.left),self.height(x.right))
+				# 노드들의 height 정보 update 필요
 		def deleteByMerging(self, x):
 			a, b, pt = x.left, x.right, x.parent
 			if a == None: # x.left가 없는 경우
@@ -84,14 +83,16 @@ class BST:
 				c = m = a # x.left가 max이면서 c(x)
 				while m.right != None:
 					m = m.right
+					self.height(x)
 				m.right = b
 				if b != None: #b가 있을 때
 					b.parent = m # b의 부모는 max 연결 끝
-
+					
 			if self.root == x: # 루트가 x면
 				if c: # c가 x이면
 					c.parent = None #c의 부모가 None
 				self.root = c #다시 루트는 c가 됨
+
 			else: # 루트가 아니면
 				if pt.left == x: # x의 위치가 왼쪽이면
 					pt.left = c #왼쪽에 c가 들어가고
@@ -99,11 +100,15 @@ class BST:
 					pt.right = c #아니면 오른쪽에 들어가고 
 				if c != None:
 					c.parent = pt #c를 x로 완전히 만들기 위해 부모연결
+
 			self.size = self.size - 1
+			x.height = max(self.height(x.left),self.height(x.right)) +1
 					# 노드들의 height 정보 update 필요
 
 		def deleteByCopying(self, x):
 			a, b, pt = x.left, x.right, x.parent
+			x.height = max(self.height(x.left),self.height(x.right)) +1
+			
 			if a: # x.left가 없는 경우
 				y = x.left
 				while y.right:
@@ -129,6 +134,7 @@ class BST:
 					y.parent.right = y.right
 				del y
 
+
 			else:
 				if pt == None:
 					self.root = None
@@ -138,14 +144,17 @@ class BST:
 					else:
 						pt.right = None
 					del x
+
 			self.size = self.size - 1
-					# 노드들의 height 정보 update 필요
+			
+			# 노드들의 height 정보 update 필요
 
 		def height(self, x): # 노드 x의 height 값을 리턴
-				if x == None:
+				if x is None:
 					return -1
-				else:
-					return x.height
+				leftHeight = self.height(x.left) + 1
+				rightHeight = self.height(x.right) + 1
+				return max(leftHeight, rightHeight)
 
 		def succ(self, x): # key값의 오름차순 순서에서 x.key 값의 다음 노드(successor) 리턴
 			if x.right != None:
@@ -193,9 +202,10 @@ class BST:
 				b.parent = x
 			if x == self.root:
 				self.root = z
+			x.height = 1 + max(self.height(x.left),self.height(x.right))
 			
-			
-		def rotateRight(self, x): # 균형이진탐색트리의 1차시 동영상 시청 필요 (height 정보 수정 필요)
+		def rotateRight(self, x):
+			# 균형이진탐색트리의 1차시 동영상 시청 필요 (height 정보 수정 필요)
 			if x == None:
 				return
 			a = x.left
@@ -215,6 +225,7 @@ class BST:
 				c.parent = x # 6번 링크 수정
 			if self.root == x:
 				self.root = a # 루트 정보 업데이트
+			x.height = 1 + max(self.height(x.left),self.height(x.right))
 
 T = BST()
 while True:
