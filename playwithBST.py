@@ -29,9 +29,9 @@ class BST:
 
 		def postorder(self, v):
 			if v != None:
+				self.postorder(v.left)
+				self.postorder(v.right)
 				print(v,'',end='')
-				self.preorder(v.left)
-				self.preorder(v.right)
 				
 				
 		def find_loc(self, key):
