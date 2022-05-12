@@ -133,8 +133,6 @@ class BST:
 				else:
 					y.parent.right = y.right
 				del y
-
-
 			else:
 				if pt == None:
 					self.root = None
