@@ -1,4 +1,4 @@
-class Node
+class Node:
 	  def __init__(self, key):
 		  self.key = key
 		  self.parent = self.left = self.right = None
