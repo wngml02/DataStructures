@@ -101,7 +101,6 @@ class BST:
 					pt.right = c #아니면 오른쪽에 들어가고 
 				if c != None:
 					c.parent = pt #c를 x로 완전히 만들기 위해 부모연결
-
 			self.size = self.size - 1
 			x.height = max(self.height(x.left),self.height(x.right)) +1
 					# 노드들의 height 정보 update 필요
@@ -143,7 +142,6 @@ class BST:
 					else:
 						pt.right = None
 					del x
-
 			self.size = self.size - 1
 			
 			# 노드들의 height 정보 update 필요
