@@ -1,11 +1,11 @@
-class Node
-	  def __init__(self, key):
-		  self.key = key
-		  self.parent = self.left = self.right = None
-		  self.height = 0  # 높이 정보도 유지함에 유의!!
+class Node:
+	def __init__(self, key):
+		self.key = key
+		self.parent = self.left = self.right = None
+		self.height = 0  # 높이 정보도 유지함에 유의!!
 
-	  def __str__(self):
-		  return str(self.key)
+	def __str__(self):
+		return str(self.key)
 
 
 class BST:
