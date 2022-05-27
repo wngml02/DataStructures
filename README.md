@@ -1,2 +1,3 @@
 # DataStructures
-tree
+1. tree
+
