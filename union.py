@@ -1,41 +1,44 @@
-class Node:
+class Node: #노드 생성 클래스
 	def __init__(self, key):
 		self.key = key
 		self.parent = self
-#
-# 4개의 연산 함수 코드 등
-#
-def find(x):
-	while x.parent != x:
-		return find(x.parent)
-	return x
+		
+		
+class union(Node): #Node클래스를 받는 union클래스
+	def find(x): #x의 root 함수를 찾는 함수
+		while x.parent != x:
+				x = x.parent
+		return x
 
-def set_friends(x, y):
-		x = Node(x)
-		y = Node(y)
-		x.parent = y.parent
+	def set_friends(x, y):
+			x = find(x)
+			y = find(y) #x와 y의 루트 노드 찾기
+			#아군으로 만드는 함수이기 때문에 상관없이 무조건 합집합
+			if x < y:
+				y.parent = x
+			else:
+				x.parent = y
 
 
-def set_enemies(x, y):
-		x = Node(x)
-		y = Node(y)
-		x.parent = x
-		y.parent = y
+	def set_enemies(x, y):
+			x = find(x)
+			y = find(y)#루트 노드 찾기
+			x.parent = x
+			y.parent = y #각자 루트 노드는 자기 자신으로 적군 만들기
 
 def are_friends(x, y):
-		x, y = find(x), find(y)
-		if x == y:
-			return True
-		else:
-			return False
+			x, y = union.find(x), union.find(y) #x와 y의 루트 노드 찾기
+			if x == y: #같을 경우 아군이기에
+				return True
+			else: #그 외의 경우
+				return False
 
 def are_enemies(x, y):
-		x, y = find(x), find(y)
-		if x != y:
-			return True
-		else:
-			return False
-	
+			x, y = union.find(x), union.find(y) #x와 y 루트 노드 찾기
+			if x != y: #다를 경우 적군이기에 
+				return True
+			else: # 그외 경우
+				return False
 
 n = int(input())
 
