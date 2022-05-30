@@ -1,16 +1,40 @@
-def set_friends(x, y):
-	x = Node(x)
-	y = Node(y)
-	
-	
-	
-def set_enemies(x, y):
+class Node:
+	def __init__(self, key):
+		self.key = key
+		self.parent = self
+#
+# 4개의 연산 함수 코드 등
+#
+def find(x):
+	while x.parent != x:
+		return find(x.parent)
+	return x
 
-	
+def set_friends(x, y):
+		x = Node(x)
+		y = Node(y)
+		x.parent = y.parent
+
+
+def set_enemies(x, y):
+		x = Node(x)
+		y = Node(y)
+		x.parent = x
+		y.parent = y
+
 def are_friends(x, y):
-	
-	
+		x, y = find(x), find(y)
+		if x == y:
+			return True
+		else:
+			return False
+
 def are_enemies(x, y):
+		x, y = find(x), find(y)
+		if x != y:
+			return True
+		else:
+			return False
 	
 
 n = int(input())
