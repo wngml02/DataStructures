@@ -1,13 +1,27 @@
-#
-# 4개의 연산 함수 코드 등
-#
+def set_friends(x, y):
+	x = Node(x)
+	y = Node(y)
+	
+	
+	
+def set_enemies(x, y):
 
+	
+def are_friends(x, y):
+	
+	
+def are_enemies(x, y):
+	
 
 n = int(input())
 
 #
 # 필요한 자료구조 정의
 #
+class Node:
+	def __init__(self, key):
+		self.key = key
+		self.parent = self
 
 # 아래 코드는 가능하면 고치지 말 것!
 while True:
