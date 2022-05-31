@@ -1,3 +1,6 @@
+
+# 4개의 연산 함수 코드 등
+#
 class Node: #노드 생성 클래스
 	def __init__(self, key):
 		self.key = key
@@ -9,6 +12,7 @@ class union(Node): #Node클래스를 받는 union클래스
 		while x.parent != x:
 				x = x.parent
 		return x
+	# while 문으로 인해 find 함수의 시간복잡도가 O(n)이다.
 
 	def set_friends(x, y):
 			x = find(x)
@@ -18,13 +22,14 @@ class union(Node): #Node클래스를 받는 union클래스
 				y.parent = x
 			else:
 				x.parent = y
-
+	# set_friends 함수의 시간복잡도는 O(logn)이다.
 
 	def set_enemies(x, y):
 			x = find(x)
 			y = find(y)#루트 노드 찾기
 			x.parent = x
 			y.parent = y #각자 루트 노드는 자기 자신으로 적군 만들기
+			# set_enemies 함수의 시간복잡도는 O(logn)이다.
 
 def are_friends(x, y):
 			x, y = union.find(x), union.find(y) #x와 y의 루트 노드 찾기
@@ -32,6 +37,7 @@ def are_friends(x, y):
 				return True
 			else: #그 외의 경우
 				return False
+		# are_friends 함수의 시간복잡도는 O(logn)이다.
 
 def are_enemies(x, y):
 			x, y = union.find(x), union.find(y) #x와 y 루트 노드 찾기
@@ -39,16 +45,14 @@ def are_enemies(x, y):
 				return True
 			else: # 그외 경우
 				return False
+			# are_enemies 함수의 시간복잡도는 O(logn)이다.
 
 n = int(input())
-
 #
 # 필요한 자료구조 정의
 #
-class Node:
-	def __init__(self, key):
-		self.key = key
-		self.parent = self
+
+
 
 # 아래 코드는 가능하면 고치지 말 것!
 while True:
