@@ -154,7 +154,6 @@ class BST:
 				rightHeight = self.height(x.right) + 1
 				return max(leftHeight, rightHeight)
 
-
 		def succ(self, x): # key값의 오름차순 순서에서 x.key 값의 다음 노드(successor) 리턴
 			if x.right != None:
 				return x.right
