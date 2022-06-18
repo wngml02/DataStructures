@@ -142,7 +142,6 @@ class BST:
 					else:
 						pt.right = None
 					del x
-
 			self.size = self.size - 1
 			
 			# 노드들의 height 정보 update 필요
